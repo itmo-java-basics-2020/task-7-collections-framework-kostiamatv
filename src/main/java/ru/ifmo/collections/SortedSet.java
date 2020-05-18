@@ -26,11 +26,11 @@ public abstract class SortedSet<T> extends AbstractSet<T> {
         throw new UnsupportedOperationException(); // TODO implement
     }
 
-    public T[] getSorted() {
+    public List<T> getSorted() {
         throw new UnsupportedOperationException(); // TODO implement
     }
 
-    public T[] getReversed() {
+    public List<T> getReversed() {
         throw new UnsupportedOperationException(); // TODO implement
     }
 }
