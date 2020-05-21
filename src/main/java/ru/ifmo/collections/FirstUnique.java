@@ -1,6 +1,5 @@
 package ru.ifmo.collections;
 
-
 import java.util.ArrayDeque;
 import java.util.HashSet;
 
@@ -11,7 +10,7 @@ import java.util.HashSet;
 public class FirstUnique {
 
     private final HashSet<Integer> nonUnique = new HashSet<>();
-    private final ArrayDeque<Integer> unique = new ArrayDeque<>(0);
+    private final ArrayDeque<Integer> unique = new ArrayDeque<>();
 
     public FirstUnique(int[] numbers) {
         for (int number : numbers) {

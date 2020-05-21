@@ -17,7 +17,15 @@ import java.util.*;
  */
 public class SortedSet<T> extends AbstractSet<T> {
 
-    private TreeMap<T, Boolean> contents;
+    private final TreeMap<T, Boolean> contents;
+
+    private SortedSet() {
+        this.contents = new TreeMap<>();
+    }
+
+    private SortedSet(Comparator<T> comparator) {
+        this.contents = new TreeMap<>(comparator);
+    }
 
 
     public static <T> SortedSet<T> create() {
@@ -36,10 +44,10 @@ public class SortedSet<T> extends AbstractSet<T> {
 
     @Override
     public boolean remove(Object o) {
-        if (o == null){
+        if (o == null) {
             throw new IllegalArgumentException("Argument is null");
         }
-        return contents.remove(o) == null;
+        return contents.remove(o) != null;
     }
 
     @Override
@@ -76,14 +84,6 @@ public class SortedSet<T> extends AbstractSet<T> {
     @Override
     public int size() {
         return contents.keySet().size();
-    }
-
-    private SortedSet() {
-        this.contents = new TreeMap<>();
-    }
-
-    private SortedSet(Comparator<T> comparator) {
-        this.contents = new TreeMap<>(comparator);
     }
 
 

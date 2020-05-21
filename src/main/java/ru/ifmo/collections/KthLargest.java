@@ -12,12 +12,11 @@ import java.util.Arrays;
  */
 public class KthLargest {
 
-    ArrayList<Integer> kLargest;
+    private final ArrayList<Integer> kLargest;
 
     public KthLargest(int k, int[] numbers) {
         Arrays.sort(numbers);
         kLargest = new ArrayList<>();
-
         for (int i = 0; i < k; i++) {
             kLargest.add(numbers[numbers.length - i - 1]);
         }
