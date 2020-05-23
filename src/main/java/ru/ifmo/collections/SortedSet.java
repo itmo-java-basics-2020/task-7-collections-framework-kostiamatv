@@ -36,7 +36,6 @@ public class SortedSet<T> extends AbstractSet<T> {
         return new SortedSet<>(comparator);
     }
 
-
     @Override
     public boolean add(T value) {
         return contents.put(value, true) == null;
@@ -85,6 +84,5 @@ public class SortedSet<T> extends AbstractSet<T> {
     public int size() {
         return contents.keySet().size();
     }
-
 
 }
