@@ -17,7 +17,7 @@ public class LruCache<K, V> {
 
     private static final float LOAD_FACTOR = 1f;
     private final int capacity;
-    private final LinkedHashMap<K, V> linkedHashMap;
+    private final Map<K, V> linkedHashMap;
 
     public LruCache(int initialCapacity) {
         linkedHashMap = new LinkedHashMap<>(initialCapacity, LOAD_FACTOR, true) {
