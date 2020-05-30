@@ -1,36 +1,88 @@
 package ru.ifmo.collections;
 
-import java.util.AbstractSet;
-import java.util.Comparator;
+import java.util.*;
 
 /**
  * Represents sorted set of unique values.
  * create() returns a SortedSet instance with natural ordering. (i.e. from smallest to largest in case of integer numbers)
  * from() is used to create a SortedSet instance with given Comparator.
  * Instances of a class can be created using only these two methods above.
- *
+ * <p>
  * This class should not be abstract and should be capable of adding/removing single/multiple elements.
  * It has two more methods: getSorted() and getReversed() which return an array of set contents in forward and reverse order respectively.
- *
+ * <p>
  * NB! This class must have only map(s) as an internal data structure(s).
  *
  * @param <T> set contents type
  */
-public abstract class SortedSet<T> extends AbstractSet<T> {
-    // private final Map<???, ???> contents; TODO decide Map implementation and key/value types. "???" is used just as an example
+public class SortedSet<T> extends AbstractSet<T> {
+
+    private final TreeMap<T, Boolean> contents;
+
+    private SortedSet() {
+        this.contents = new TreeMap<>();
+    }
+
+    private SortedSet(Comparator<T> comparator) {
+        this.contents = new TreeMap<>(comparator);
+    }
+
+
     public static <T> SortedSet<T> create() {
-        throw new UnsupportedOperationException(); // TODO implement
+        return new SortedSet<>();
     }
 
     public static <T> SortedSet<T> from(Comparator<T> comparator) {
-        throw new UnsupportedOperationException(); // TODO implement
+        return new SortedSet<>(comparator);
+    }
+
+    @Override
+    public boolean add(T value) {
+        return contents.put(value, true) == null;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        if (o == null) {
+            throw new IllegalArgumentException("Argument is null");
+        }
+        return contents.remove(o) != null;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> collection) {
+        boolean added = false;
+        for (T value : collection) {
+            added = added | contents.put(value, true) == null;
+        }
+        return added;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> collection) {
+        boolean removed = false;
+        for (var value : collection) {
+            removed = removed | contents.remove(value) != null;
+        }
+        return removed;
     }
 
     public List<T> getSorted() {
-        throw new UnsupportedOperationException(); // TODO implement
+        return new ArrayList<>(contents.keySet());
     }
 
     public List<T> getReversed() {
-        throw new UnsupportedOperationException(); // TODO implement
+        return new ArrayList<>(contents.descendingKeySet());
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return contents.keySet().iterator();
+    }
+
+    @Override
+    public int size() {
+        return contents.keySet().size();
+    }
+
 }
